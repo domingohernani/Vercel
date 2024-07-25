@@ -5,13 +5,11 @@ import "./App.css";
 
 function App() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [showInstallButton, setShowInstallButton] = useState(false);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setShowInstallButton(true);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
@@ -25,9 +23,11 @@ function App() {
   }, []);
 
   const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      console.log("No install prompt available");
+      return;
+    }
 
-    setShowInstallButton(false);
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
 
@@ -52,9 +52,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        {showInstallButton && (
-          <button onClick={handleInstallClick}>Install App</button>
-        )}
+        <button onClick={handleInstallClick}>Install App</button>
       </div>
       <p>
         Edit <code>src/App.jsx</code> and save to test HMR
