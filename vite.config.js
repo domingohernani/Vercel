@@ -1,28 +1,19 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+
 const manifestForPlugin = {
   registerType: "prompt",
-  includeAssets: ["vite.svg"],
+  includeAssets: [
+    "favicon.ico",
+    "robots.txt",
+    "apple-touch-icon.png",
+    "favicon-16x16.png",
+    "favicon-32x32.png",
+    "android-chrome-192x192.png",
+    "android-chrome-512x512.png",
+  ],
   manifest: {
-    icons: [
-      {
-        src: "/icons/android-chrome-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        src: "/icons/android-chrome-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-      {
-        src: "/icons/android-chrome-maskable-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "maskable",
-      },
-    ],
     name: "Vaxcare",
     short_name: "Vaxcare",
     description: "I am a simple vite app",
@@ -32,10 +23,67 @@ const manifestForPlugin = {
     scope: "/",
     start_url: "/",
     orientation: "portrait",
+    screenshots: [
+      {
+        src: "screenshots/home.png",
+        sizes: "540x720",
+        type: "image/png",
+        form_factor: "wide",
+      },
+      {
+        src: "screenshots/feature1.png",
+        sizes: "540x720",
+        type: "image/png",
+        form_factor: "narrow",
+      },
+      {
+        src: "screenshots/feature2.png",
+        sizes: "540x720",
+        type: "image/png",
+        form_factor: "wide",
+      },
+    ],
+    icons: [
+      {
+        src: "android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+        purpose: "any",
+      },
+    ],
   },
 };
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA(manifestForPlugin)],
 });
